@@ -14,7 +14,7 @@ d.pa313 <- read.csv("../../data/data_pref_attach_3_without_storage_item3.csv")
 d.pa313$num_item <- 3
 d.pa314 <- read.csv("../../data/data_pref_attach_3_without_storage_item4.csv")
 d.pa314$num_item <- 4
-d.pa315 <- read.csv("../../data/data_pref_attach_3_without_storage_item5.csv") 
+d.pa315 <- read.csv("../../data/data_pref_attach_3_without_storage_item5.csv")
 d.pa315$num_item <- 5
 
 d.pa223 <- read.csv("../../data/data_pref_attach_2_with_storage_item3.csv")
