@@ -14,7 +14,7 @@
 
 # Python codes
 - generate_networks.py
-	Generate a network topology of small-world or preferential attachement network and record it as edge list.
+	Generate a network topology of small-world or preferential attachment network and record it as edge list.
 
 - examine_completion.py
 	Calculate the average number of nodes who have a complete set of items with neighbors among the fully colored networks.
