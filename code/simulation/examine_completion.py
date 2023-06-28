@@ -30,11 +30,13 @@ for k in range(500):
 
     # Calculate the completion nodes from the division of labor perspective
     COMP = []
-    for i in range(int(cp/3)):
+    for i in range(int(cp/3)): # Divide by 3 because that is the number of actual configurations
+        # This step seems inefficient? Try to put this outside the loop ***
         CD = numOfSolutionsDepthC.getSampleCombination2(G, i)
-    	#print(CD)
+    	# print(CD)
         comp = 0
         for n in G.nodes():
+            # THIS IS DIVISION OF LABOR; checks for indiviudal node completion
             L = {1: False, 2: False, 3: False}
             L[CD[n]] = True
             for nei in G.neighbors(n):
