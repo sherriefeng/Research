@@ -14,7 +14,7 @@ cdef int depthFirstSearch(int start, int goal):
 	cdef int rank = start				# Rank represents the current node's ID, sorted by degree!!!
 	cdef int color						# Color of the current node
 	cdef list candidates				# Candidate colors for neighboring nodes
-	stack[rank] = C[start].pop()		# Stack is an array of rank:current list of possible colors (first node = [1])
+	stack[rank] = C[start].pop()		# Stack is an array of rank:current list of possible colors (first node = 1)
 	while 1:
 		if numSolutions * 3 > 1000000:	# EVERY COMBINATION HAS 3 POSSIBLE CHOICES, SO YOU MULTIPLY BY 3
 			return numSolutions			
@@ -30,11 +30,11 @@ cdef int depthFirstSearch(int start, int goal):
 		else:
 			color = C[rank + 1].pop() # Arbitrarily choose (pop) a color
 			# Question: is "x < rank + 1" just an optimization step? Or is it necessary?
-			# Answer: If a node that has more neighbors (higher rank) is also a neighbor, append its candidate colors
-			candidates = [stack[x] for x in M[rank + 1] if x < rank + 1] # DFS
+			# Answer: This is DFS; if a node that has more neighbors (higher rank) is also a neighbor, append its candidate colors
+			candidates = [stack[x] for x in M[rank + 1] if x < rank + 1]
 
 			# Graph coloring: If the popped color is not already present (it's still needed among neighbors)
-			if color not in candidates: # Not conlict
+			if color not in candidates: # not conflict
 				if rank + 1 == goal:
 					numSolutions += 1
 				else:
@@ -161,10 +161,10 @@ cdef np.ndarray[DTYPE_t, ndim=1] depthSearchStuckSample2(int start, int goal, in
 		else:
 			color = C[rank + 1].pop()
 			candidates = [stack[x] for x in M[rank + 1] if x < rank + 1]
-			if color not in candidates: #not conlict
+			if color not in candidates: # not conlict
 				if rank + 1 == goal:
 					# This is where the new parameter "num" is used
-					if numSolutions == num: # random
+					if numSolutions == num: # random (This isn't random though, it's set in examine_completion.py)
 						stack[rank + 1] = color
 						return stack
 					else:
