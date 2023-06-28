@@ -1,8 +1,8 @@
-import numpy as np
+# import numpy as np
 cimport numpy as np
 
-DTYPE = np.int
-ctypedef np.int_t DTYPE_t
+DTYPE = np.int64
+ctypedef np.int64_t DTYPE_t
 
 cdef dict M = {}
 cdef dict C = {}

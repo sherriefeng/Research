@@ -28,7 +28,7 @@ for k in range(500):
     path = nx.average_shortest_path_length(G) # calculate average shortest path length
     trans = nx.transitivity(G) # calculate transitivity
 
-    # Calcurate the competion nodes from the division of labor perspective
+    # Calcurate the completion nodes from the division of labor perspective
     COMP = []
     for i in range(int(cp/3)):
         CD = numOfSolutionsDepthC.getSampleCombination2(G, i)
