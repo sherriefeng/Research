@@ -14,7 +14,7 @@ ofile = csv.writer(open("../../data/data_small_world_s2_without_storage_item3.cs
 ofile.writerows([["gameId", "size", "#short_cut", "#solutions", "clutering", "shortest_path", "ave_rate", "std_rate", "median_rate"]])
 
 n = 42 # nunber of nodes
-th = 0 #100000 # threthohold that represents storage capacity
+th = 0 # 100000 # threshold that represents storage capacity
 
 for k in range(500):
     print(k)
@@ -42,7 +42,7 @@ for k in range(500):
             D[gn] = 0
 
         # Initialize node color for 3 items
-        # 0=generalization, 1=specialization of item1, 2=specialization of item2, 2=specialization of item3
+        # 0 = generalization, 1 = specialization of item1, 2 = specialization of item2, 3 = specialization of item3
         cycls_3 = [c for c in nx.cycle_basis(G) if len(c)==3]
         e = random.choice(cycls_3)
         D[e[0]] = 1
@@ -50,19 +50,19 @@ for k in range(500):
         D[e[2]] = 3
 
         # Initialize node color for 2 items
-        #e = random.choice(list(G.edges()))
-        #D[e[0]] = 1
-        #D[e[1]] = 2
+        # e = random.choice(list(G.edges()))
+        # D[e[0]] = 1
+        # D[e[1]] = 2
 
         # Initialize node color for 4 items
-        #cycls_3 = [c for c in nx.cycle_basis(G) if len(c)==3]
-        #e = random.choice(cycls_3)
-        #D[e[0]] = 1
-        #D[e[1]] = 2
-        #D[e[2]] = 3
-        #max_v = 0
-        #max_gn = None
-        #for gn in G.nodes():
+        # cycls_3 = [c for c in nx.cycle_basis(G) if len(c)==3]
+        # e = random.choice(cycls_3)
+        # D[e[0]] = 1
+        # D[e[1]] = 2
+        # D[e[2]] = 3
+        # max_v = 0
+        # max_gn = None
+        # for gn in G.nodes():
         #    if gn not in e:
         #        vv = 0
         #        for en in e:
@@ -71,13 +71,13 @@ for k in range(500):
         #        if vv > max_v:
         #            max_v = vv
         #            max_gn = gn
-        #D[max_gn] = 4
+        # D[max_gn] = 4
 
 
         # Run the simulation
-        rate= divisionGame.runWithDL3(G, D, th) # Division of labor game with 3 items
-        #rate= divisionGame.runWithDL2(G, D, th) # Division of labor game with 2 items
-        #rate= divisionGame.runWithDL4(G, D, th) # Division of labor game with 4 items
+        rate = divisionGame.runWithDL3(G, D, th) # Division of labor game with 3 items
+        # rate = divisionGame.runWithDL2(G, D, th) # Division of labor game with 2 items
+        # rate = divisionGame.runWithDL4(G, D, th) # Division of labor game with 4 items
 
         Rate.append(rate[-1])
 

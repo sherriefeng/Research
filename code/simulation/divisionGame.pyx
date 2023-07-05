@@ -1,9 +1,8 @@
 import numpy as np
 cimport numpy as np
 
-
-DTYPE = np.int
-ctypedef np.int_t DTYPE_t
+DTYPE = np.int64
+ctypedef np.int64_t DTYPE_t
 
 #########
 # Division of labor game with 3 items

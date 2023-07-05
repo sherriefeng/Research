@@ -7,7 +7,7 @@ import numOfSolutionsDepthC
 import divisionGame
 
 ifile1 = csv.reader(open("../../data/networks/taro_exchange.csv", 'r'))
-#ifile1.next()
+# ifile1.next()
 
 OG = nx.Graph()
 A = {}
@@ -19,22 +19,20 @@ for data in ifile1:
 			OG.add_edge(count, i)
 	count += 1
 
-#cp = numOfSolutionsDepthC.getNumOfSolutions(G)
-#print cp
-#print len(G.nodes())
-#print len(G.edges())
-#print nx.density(G)
-#print nx.average_clustering(G)
-#print nx.average_shortest_path_length(G)
+# cp = numOfSolutionsDepthC.getNumOfSolutions(G)
+# print cp
+# print len(G.nodes())
+# print len(G.edges())
+# print nx.density(G)
+# print nx.average_clustering(G)
+# print nx.average_shortest_path_length(G)
 
-#plt.figure(facecolor="white", figsize=(8,8))
-#pos = nx.nx_agraph.graphviz_layout(G, prog='neato')
-#nx.draw(G, pos, node_color='black', node_size=150)
-#plt.show()
+# plt.figure(facecolor="white", figsize=(8,8))
+# pos = nx.nx_agraph.graphviz_layout(G, prog='neato')
+# nx.draw(G, pos, node_color='black', node_size=150)
+# plt.show()
 
-
-
-#Simulation
+# Simulation
 ofile = csv.writer(open("../../data/data_real_network.csv", "w"))
 ofile.writerows([["group", "threshold", "num_node", "num_edge", "density", "cp", "clustering", "path_length", "#step", "rate_completion", "std_cp", "std_clustering", "str_path_length", "std_rate_completion"]])
 
