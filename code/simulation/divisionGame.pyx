@@ -9,22 +9,21 @@ ctypedef np.int64_t DTYPE_t
 #########
 
 cdef np.ndarray[DTYPE_t, ndim=1] _runWithDL3(list Nodes, dict Neighbors, np.ndarray[DTYPE_t, ndim=1] C, np.ndarray[DTYPE_t, ndim=1] A, int h):
-
     cdef int nsize = len(Nodes)
     cdef int n, neighbor, learner, k, nei
     cdef int is1, is2, is3
     cdef int numD = 0
     cdef int isDef = 1
     cdef int numSim = 5000
-    cdef np.ndarray[DTYPE_t, ndim=1] R = np.zeros(numSim, dtype=DTYPE)
+    cdef np.ndarray[DTYPE_t, ndim=1] R = np.zeros(numSim, dtype=DTYPE) # Rate of incompletion for each simulation
 
     for i in range(numSim):
-
         learner = np.random.choice(Nodes)
-
         is1 = 0
         is2 = 0
         is3 = 0
+
+        # Updates neighbor specialization booleans
         for neighbor in Neighbors[learner]:
             if C[neighbor] == 1:
                 is1 = 1
@@ -33,9 +32,11 @@ cdef np.ndarray[DTYPE_t, ndim=1] _runWithDL3(list Nodes, dict Neighbors, np.ndar
             elif C[neighbor] == 3:
                 is3 = 1
 
+        # If division of labor is solved in the node's neighborhood
         if is1 == 1 and is2 == 1 and is3 == 1:
-            if A[learner] < h:
-                #if C[learner] == 0:
+            # If threshold is not passed, randomly assign new specialization to node
+            if A[learner] < h: # Curious about why this needs to exist; A is never reported back
+                # if C[learner] == 0:
                 C[learner] = np.random.choice([1, 2, 3])
                 A[learner] += 1
             else:
@@ -70,8 +71,8 @@ cdef np.ndarray[DTYPE_t, ndim=1] _runWithDL3(list Nodes, dict Neighbors, np.ndar
                 C[learner] = 0
                 A[learner] = 0
 
-        numD = 0
 
+        numD = 0 # Number of nodes that have not satisfied DoL
         for k in range(nsize):
             is1 = 0
             is2 = 0
@@ -98,12 +99,14 @@ cdef np.ndarray[DTYPE_t, ndim=1] _runWithDL3(list Nodes, dict Neighbors, np.ndar
 
     return R
 
-
 def runWithDL3(G, CD, h):
+    # Initializes A (how many times the node has solved DoL, contingent on threshold) as zero arrays
     cdef np.ndarray[DTYPE_t, ndim=1] C = np.zeros(len(G.nodes()), dtype=DTYPE)
     cdef np.ndarray[DTYPE_t, ndim=1] A = np.zeros(len(G.nodes()), dtype=DTYPE)
     cdef dict Neighbors = {}
-    cdef int h2 = h
+    cdef int h2 = h # Threshold
+
+    # Initializes C (specialization of each node), same as D in run files
     for n in G.nodes():
         C[n] = CD[n]
         Neighbors[n] = list(G.neighbors(n))
@@ -119,7 +122,6 @@ def runWithDL3(G, CD, h):
 #########
 
 cdef np.ndarray[DTYPE_t, ndim=1] _runWithDL2(list Nodes, dict Neighbors, np.ndarray[DTYPE_t, ndim=1] C, np.ndarray[DTYPE_t, ndim=1] A, int h):
-
     cdef int nsize = len(Nodes)
     cdef int n, neighbor, learner
     cdef int is1, is2
@@ -131,9 +133,9 @@ cdef np.ndarray[DTYPE_t, ndim=1] _runWithDL2(list Nodes, dict Neighbors, np.ndar
 
     for i in range(numSim):
         learner = np.random.choice(Nodes)
-
         is1 = 0
         is2 = 0
+
         for neighbor in Neighbors[learner]:
             if C[neighbor] == 1:
                 is1 = 1
@@ -205,8 +207,7 @@ def runWithDL2(G, CD, h):
 # Division of labor game with 4 items
 #########
 
-cdef np.ndarray[DTYPE_t, ndim=1] _runWithDL4(list Nodes, dict Neighbors, np.ndarray[DTYPE_t, ndim=1] C, np.ndarray[DTYPE_t, ndim=1] A, int h): #with latency
-
+cdef np.ndarray[DTYPE_t, ndim=1] _runWithDL4(list Nodes, dict Neighbors, np.ndarray[DTYPE_t, ndim=1] C, np.ndarray[DTYPE_t, ndim=1] A, int h): # with latency
     cdef int nsize = len(Nodes)
     cdef int n, neighbor, learner, k, nei
     cdef int is1, is2, is3, is4
@@ -216,13 +217,12 @@ cdef np.ndarray[DTYPE_t, ndim=1] _runWithDL4(list Nodes, dict Neighbors, np.ndar
     cdef np.ndarray[DTYPE_t, ndim=1] R = np.zeros(numSim, dtype=DTYPE)
 
     for i in range(numSim):
-
         learner = np.random.choice(Nodes)
-
         is1 = 0
         is2 = 0
         is3 = 0
         is4 = 0
+
         for neighbor in Neighbors[learner]:
             if C[neighbor] == 1:
                 is1 = 1
@@ -290,7 +290,6 @@ cdef np.ndarray[DTYPE_t, ndim=1] _runWithDL4(list Nodes, dict Neighbors, np.ndar
                 A[learner] = 0
 
         numD = 0
-
         for k in range(nsize):
             is1 = 0
             is2 = 0
@@ -316,7 +315,6 @@ cdef np.ndarray[DTYPE_t, ndim=1] _runWithDL4(list Nodes, dict Neighbors, np.ndar
             if is1 == 0 or is2 == 0 or is3 == 0 or is4 == 0:
                 numD += 1
 
-
         R[i] = numD
         if numD == 0:
             break;
@@ -328,6 +326,7 @@ def runWithDL4(G, CD, h):
     cdef np.ndarray[DTYPE_t, ndim=1] A = np.zeros(len(G.nodes()), dtype=DTYPE)
     cdef dict Neighbors = {}
     cdef int h2 = h
+
     for n in G.nodes():
         C[n] = CD[n]
         Neighbors[n] = list(G.neighbors(n))
@@ -337,12 +336,12 @@ def runWithDL4(G, CD, h):
     return _runWithDL4(Nodes, Neighbors, C, A, h2)
 
 
+
 #########
 # Division of labor game with 5 items (only without storage)
 #########
 
-cdef np.ndarray[DTYPE_t, ndim=1] _runWithDL5(list Nodes, dict Neighbors, np.ndarray[DTYPE_t, ndim=1] C): #without latency
-
+cdef np.ndarray[DTYPE_t, ndim=1] _runWithDL5(list Nodes, dict Neighbors, np.ndarray[DTYPE_t, ndim=1] C): # without latency
     cdef int nsize = len(Nodes)
     cdef int n, neighbor, learner, k, nei
     cdef int is1, is2, is3, is4, is5
@@ -352,14 +351,13 @@ cdef np.ndarray[DTYPE_t, ndim=1] _runWithDL5(list Nodes, dict Neighbors, np.ndar
     cdef np.ndarray[DTYPE_t, ndim=1] R = np.zeros(numSim, dtype=DTYPE)
 
     for i in range(numSim):
-
         learner = np.random.choice(Nodes)
-
         is1 = 0
         is2 = 0
         is3 = 0
         is4 = 0
         is5 = 0
+
         for neighbor in Neighbors[learner]:
             if C[neighbor] == 1:
                 is1 = 1
@@ -394,7 +392,6 @@ cdef np.ndarray[DTYPE_t, ndim=1] _runWithDL5(list Nodes, dict Neighbors, np.ndar
             C[learner] = 0
 
         numD = 0
-
         for k in range(nsize):
             is1 = 0
             is2 = 0
@@ -424,7 +421,6 @@ cdef np.ndarray[DTYPE_t, ndim=1] _runWithDL5(list Nodes, dict Neighbors, np.ndar
                     is5 = 1
             if is1 == 0 or is2 == 0 or is3 == 0 or is4 == 0 or is5 == 0:
                 numD += 1
-
 
         R[i] = numD
         if numD == 0:

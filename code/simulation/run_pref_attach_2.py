@@ -37,13 +37,19 @@ for k in range(500):
     for j in range (100):
 
         D = {}
-        for gn in list(G.nodes()):
+        # Initially, D is a zero array
+        for gn in list(G.nodes()): # Uses list() just to be careful about types
             D[gn] = 0
 
         # Initialize node color for 3 items
         # 0 = generalization, 1 = specialization of item1, 2 = specialization of item2, 3 = specialization of item3
+
+        # ***Assumption: 3 nodes in a cycle specialize at the beginning
+        # Contains cycles of length 3 from graph G
         cycls_3 = [c for c in nx.cycle_basis(G) if len(c)==3]
+        # Chooses a random cycle of length 3 (list of nodes)
         e = random.choice(cycls_3)
+        # Sets the specializations for each node in the cycle s.t. it wins DoL
         D[e[0]] = 1
         D[e[1]] = 2
         D[e[2]] = 3
