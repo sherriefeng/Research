@@ -64,7 +64,7 @@ for k in range(500):
             e = random.choice(Candidates)
             ls = [1, 2, 3, 4]
             random.shuffle(ls)
-            D[e[0]] = ls[0]
+            D[e[0]] = ls[0]x
             D[e[1]] = ls[1]
             D[e[2]] = ls[2]
             D[e[3]] = ls[3]
