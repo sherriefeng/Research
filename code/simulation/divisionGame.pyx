@@ -35,14 +35,14 @@ cdef np.ndarray[DTYPE_t, ndim=1] _runWithDL3(list Nodes, dict Neighbors, np.ndar
         # If division of labor is solved in the node's neighborhood
         if is1 == 1 and is2 == 1 and is3 == 1:
             # If threshold is not passed, randomly assign new specialization to node
-            if A[learner] < h: # Curious about why this needs to exist; A is never reported back
+            if A[learner] < h:
                 # if C[learner] == 0:
-                C[learner] = np.random.choice([1, 2, 3])
+                C[learner] = np.random.choice([1, 2, 3]) # This is not greedy?
                 A[learner] += 1
             else:
                 C[learner] = 0
                 A[learner] = 0
-
+        
         elif is1 == 1 and is2 == 1 and is3 == 0:
             C[learner] = 3
             A[learner] = 0

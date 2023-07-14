@@ -107,5 +107,3 @@ summary(fit3.1)
 d32 <- merge(d.pa324, d.pa30, by="gameId")
 fit3.2 <- lm((1.0-ave_rate) ~ scale(log10(X.solutions.x)) + scale(clustering) + scale(shortest_path), data=d32)
 summary(fit3.2)
-
-

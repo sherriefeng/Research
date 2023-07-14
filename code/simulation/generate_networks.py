@@ -34,7 +34,7 @@ for k in range(500):
  #            break;
     #nx.write_edgelist(G, '../../data/networks/sw_shortcut2/sw_shortcut2_2_' + str(k) +'.edgelist', data=False)
 
-    #pref attachemnt
-    n = 20
+    # pref attachemnt
+    n = 10
     G = nx.barabasi_albert_graph(n, 2) #3
-    #nx.write_edgelist(G, '../../data/networks/pa_2/pa_2_2_' + str(k) +'.edgelist', data=False)
+    nx.write_edgelist(G, '../../data/networks/small_pa_2/pa_2_2_' + str(k) +'.edgelist', data=False)

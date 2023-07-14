@@ -1,4 +1,4 @@
-# import numpy as np
+import numpy as np
 cimport numpy as np
 
 DTYPE = np.int64
@@ -9,7 +9,7 @@ cdef dict C = {} # Dictionary of rank:possible colors
 cdef POSSIBLE_COLORS = [3, 2, 1]
 
 cdef int depthFirstSearch(int start, int goal):
-	cdef int numSolutions = 0			
+	cdef int numSolutions = 0
 	cdef np.ndarray[DTYPE_t, ndim = 1] stack = np.zeros(goal + 1, dtype = DTYPE) # Stack is an array of n zeroes
 	cdef int rank = start				# Rank represents the current node's ID, sorted by degree!!!
 	cdef int color						# Color of the current node
@@ -54,6 +54,7 @@ cdef np.ndarray[DTYPE_t, ndim=1] depthSearchStuckSample(int start, int goal):
 				return stack
 			else:
 				stack[rank] = 0
+				# Differs from DFS on line below
 				C[rank + 1] = np.random.shuffle([3, 2, 1]) # initialize
 				rank -= 1
 
@@ -62,6 +63,7 @@ cdef np.ndarray[DTYPE_t, ndim=1] depthSearchStuckSample(int start, int goal):
 			candidates = [stack[x] for x in M[rank + 1] if x < rank + 1]
 			if color not in candidates: # not conlict
 				if rank + 1 == goal:
+					# Differs from DFS in this branch
 					if numSolutions == 0: # random
 						stack[rank + 1] = color
 						return stack
@@ -77,7 +79,7 @@ cdef int _getNumOfSolutions(G, dict D):
 	""" Helper function for getNumOfSolutions, takes in G (original graph) and D (node:degree dictionary)"""
 
 	cdef dict ID = {} 	# Unique ID for each node; ID = 0 means most neighbers / highest degree
-	cdef int uid = 0 	# id counter
+	cdef int uid = 0 	# ID counter
 	cdef int n, i
 	cdef int numOneDegree = 0
 
@@ -97,7 +99,7 @@ cdef int _getNumOfSolutions(G, dict D):
 	for i in range(1, n):
 		C[i] = [3, 2, 1] # Does this mean the chromatic number is always 3?
 
-	# ! Why is this multiplied by 3?
+	# Why is this multiplied by 3? Answer: Given 3 colors, there are always 3 different combinations of a solution
 	return depthFirstSearch(0, n-1) * 3
 
 def getNumOfSolutions(G):

@@ -12,7 +12,7 @@ g1 <- ggplot(dd1, aes(x=X.step, y=rate, color=group, group=group)) +
   geom_line(size=0.8) +
   scale_x_continuous( limits = c(0, 500)) +
   scale_y_continuous(breaks=seq(0, 1.0, 0.25), limits = c(0.0, 1.0)) +
-  labs(x="Step", y="% complete specialization") +
+  labs(x = "Step", y="% complete specialization") +
   scale_colour_grey(start=0.8, end=0.2) +
   theme_classic() +
   theme(

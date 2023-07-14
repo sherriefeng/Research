@@ -94,4 +94,3 @@ g3 <- ggplot(ds61, aes(x=num_item2, y=1 - ave_rate/42)) +
   theme_classic()
 
 grid.arrange(g1, g2, g3, ncol=3)
-

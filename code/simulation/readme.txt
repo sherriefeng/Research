@@ -12,6 +12,10 @@
 	The outcome variable is the number of agents who do not have a complete set of items with neighbors.
 	Run "python setup.py build_ext --inplace" to create the c code and so object.
 
+- divisionGame.pyx
+	Calculate the solution number of the one neighbor game with 3 colors
+	Run "python setup_on.py build_ext --inplace" to create the c code and so object.
+
 # Python codes
 - generate_networks.py
 	Generate a network topology of small-world or preferential attachment network and record it as edge list.
