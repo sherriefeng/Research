@@ -80,7 +80,7 @@ cdef np.ndarray[DTYPE_t, ndim=1] depthSearchStuckSample(int start, int goal):
 			if color not in candidates: # not conlict
 				if rank + 1 == goal:
 					if numSolutions == 0: # random
-						stack[rank + 1] = color
+						stack[rank + 1] = color 
 						return stack
 					else:
 						numSolutions += 1
