@@ -40,6 +40,23 @@ cdef int depthFirstSearch(int start, int goal):
 				else:
 					stack[rank + 1] = color
 					rank += 1
+		# Ann's code
+		else:
+			color = C[rank + 1].pop() # Arbitrarily choose (pop) a color
+			candidates = [stack[x] for x in M[rank + 1] if x < rank + 1]
+			# unique_colors = set(candidates + [color])
+
+			different_color_exists = any(cand_color != color for cand_color in candidates)
+			
+			if different_color_exists:
+			# If the number of unique colors is more than 1, then we know that there is at least one neighbor with a different color.
+			# if len(unique_colors) > 1: # not conflict
+				if rank + 1 == goal:
+					numSolutions += 1
+				else:
+					stack[rank + 1] = color
+					rank += 1
+
 
 cdef np.ndarray[DTYPE_t, ndim=1] depthSearchStuckSample(int start, int goal):
 	cdef int numSolutions = 0
