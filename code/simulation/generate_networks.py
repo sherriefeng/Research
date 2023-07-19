@@ -64,11 +64,11 @@ for k in range(500):
     
 	# random networks
 	n = 10
-	probability = 0.01
+	probability = 0.05
 	G = gnp_random_connected_graph(n, probability)
-	# G = nx.gnp_random_graph(n, 0.1)
         
-	# plt.figure(figsize=(8,5))
-	# nx.draw(G, node_color='lightblue', with_labels=True, node_size=500)
-	# plt.show()
-	nx.write_edgelist(G, '../../data/networks/random_10/random_10_' + str(k) +'.edgelist', data=False)
+    # plt.figure(figsize=(8,5))
+    # nx.draw(G, node_color='lightblue', with_labels=True, node_size=500)
+    # plt.show()
+
+	# nx.write_edgelist(G, '../../data/networks/random_10/random_10_' + str(k) +'.edgelist', data=False)
