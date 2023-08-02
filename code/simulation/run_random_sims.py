@@ -8,8 +8,8 @@ import divisionGame
 
 th = 0 # property threshold
 
-t_file = csv.writer(open("data_trial_random.csv", "w"))
-s_file = csv.writer(open("data_summary_random.csv", "w"))
+t_file = csv.writer(open("../../data/data_trial_random.csv", "w"))
+s_file = csv.writer(open("../../data/data_summary_random.csv", "w"))
 t_file.writerows([["size", "gameId", "ave_rate", "sd_rate"]])
 s_file.writerows([["size", "ave_rate", "sd_rate"]])
 
@@ -59,8 +59,8 @@ def main():
 
                 summary_rates.append(node_completion_rate)
             
-            # RECORD TRIAL DATA TO LOCAL FILE HERE
-            t_file.writerows([[n, k, node_completion_rate, np.std(trial_rates)]])
+                # RECORD TRIAL DATA TO LOCAL FILE HERE
+                t_file.writerows([[n, k, node_completion_rate, np.std(trial_rates)]])
             
         # RECORD SUMMARY DATA TO LOCAL FILE
         s_file.writerows([[n, np.mean(summary_rates), np.std(summary_rates)]])

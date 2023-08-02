@@ -2,6 +2,7 @@ import networkx as nx
 import random
 import numpy as np
 import csv
+import matplotlib.pyplot as plt
 
 import numOfSolutionsDepthC
 import divisionGame
@@ -23,14 +24,16 @@ for k in range(1): #500
     # Generate a network
     G = nx.connected_watts_strogatz_graph(n, kk, p)
 
+    # plt.figure(figsize=(8,5))
+    # nx.draw(G, node_color='lightblue', with_labels=True, node_size=500)
+    # plt.show()
+
     cp = numOfSolutionsDepthC.getNumOfSolutions(G) # calculate solution number with chromatic number
     cluster = nx.average_clustering(G) # calculate clustering coeff
     path = nx.average_shortest_path_length(G) # calculate average shortest path length
 
     Rate = []
     for j in range (100):
-
-
         D = {}
         for gn in list(G.nodes()):
             D[gn] = 0

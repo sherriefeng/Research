@@ -93,7 +93,7 @@ cdef np.ndarray[DTYPE_t, ndim=1] _runWithDL3(list Nodes, dict Neighbors, np.ndar
             if is1 == 0 or is2 == 0 or is3 == 0:
                 numD += 1
 
-        R[i] = numD # Basically the incompletion rate
+        R[i] = numD # Number of incomplete nodes
         if numD == 0:
             break;
 
