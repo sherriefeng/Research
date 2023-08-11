@@ -91,16 +91,16 @@ def main():
     # plt.show()
     
     # Lattice, Scatter Histogram for Completion Rates
-    # unique_values, frequencies = np.unique(comp_rates, return_counts=True)
-    # for val, freq in zip(unique_values, frequencies):
-    #     print("Completion Rate:", val, "Frequency:", freq)
-    # plt.scatter(unique_values, frequencies, marker='o', s=20, color='blue')
-    # # plt.xlim(0.95, 1.0)
-    # plt.xlabel('Completion Rate')
-    # plt.ylabel('Frequency')
-    # # plt.title('Lattice w/ ' + str(n) + ' Nodes, ' + str(k) + ' Connections Per Node')
-    # plt.title('Lattice w/ 5 to 25 Nodes, ' + str(k) + ' Connections Per Node')
-    # plt.show()
+    unique_values, frequencies = np.unique(comp_rates, return_counts=True)
+    for val, freq in zip(unique_values, frequencies):
+        print("Completion Rate:", val, "Frequency:", freq)
+    plt.scatter(unique_values, frequencies, marker='o', s=20, color='blue')
+    # plt.xlim(0.95, 1.0)
+    plt.xlabel('Completion Rate')
+    plt.ylabel('Frequency')
+    # plt.title('Lattice w/ ' + str(n) + ' Nodes, ' + str(k) + ' Connections Per Node')
+    plt.title('Lattice w/ 5 to 25 Nodes, ' + str(k) + ' Connections Per Node')
+    plt.show()
 
     # Lattice, Histogram for Steps
     # unique_values, frequencies = np.unique(all_steps, return_counts=True)
