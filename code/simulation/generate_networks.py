@@ -28,12 +28,12 @@ def gnp_random_connected_graph(n, p):
     return G
 
 def main():
-    # for n in range(5, 21): # Creating graphs of size 5 to 20 nodes
-    #     path = '../../data/networks/random_' + str(n)
+    # for n in range(5, 201, 10): # Creating graphs of size 5 to 200 nodes
+    #     path = '../../data/networks/pa_2/pa_2_' + str(n)
     #     if not os.path.exists(path):
     #         os.makedirs(path)
         
-    #     for k in range(500):
+    #     for k in range(20): # range(500):
     #         # small world with shortcuts
     #         n = 42
     #         kk = 4
@@ -74,20 +74,20 @@ def main():
     #         # G = nx.barabasi_albert_graph(n, 2) #3
     #         # nx.write_edgelist(G, '../../data/networks/small_pa_2/pa_2_2_' + str(k) +'.edgelist', data=False)
             
-    #         # random connected networks
-    #         # probability = 0.05
-    #         # G = gnp_random_connected_graph(n, probability)
+            # # random connected networks
+            # probability = 0.05
+            # G = gnp_random_connected_graph(n, probability)
                 
-    #         # plt.figure(figsize=(8,5))
-    #         # nx.draw(G, node_color='lightblue', with_labels=True, node_size=500)
-    #         # plt.show()
+            # # plt.figure(figsize=(8,5))
+            # # nx.draw(G, node_color='lightblue', with_labels=True, node_size=500)
+            # # plt.show()
 
-    #         # nx.write_edgelist(G, path + '/random_' + str(n) + '_' + str(k) +'.edgelist', data=False)
+            # nx.write_edgelist(G, path + '/random_' + str(n) + '_' + str(k) +'.edgelist', data=False)
 
-    for n in range(10, 200):
-        for k in range(50):
-            G = nx.barabasi_albert_graph(n, 2) #3
-            nx.write_edgelist(G, '../../data/networks/het_pa_2/pa_2_' + str(n) + '_' + str(k) +'.edgelist', data=False)
+    for n in range(5, 201, 10):
+        for k in range(20):
+            G = nx.barabasi_albert_graph(n, 2) # 3
+            nx.write_edgelist(G, '../../data/networks/pa_2/pa_2_' + str(n) + '/pa_2_' + str(n) + '_' + str(k) +'.edgelist', data=False)
 
 if __name__ == "__main__":
     main()
